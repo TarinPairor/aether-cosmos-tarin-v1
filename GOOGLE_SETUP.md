@@ -11,6 +11,31 @@ There are two different JSON credentials:
 
 In Google Cloud Console, use the project picker at the top to select the project that owns the credential you are configuring. Check **APIs & Services → Credentials** for the OAuth client. Find the service account under **IAM & Admin → Service Accounts**. The service account's email is listed in its row; use that email when sharing a spreadsheet. Do not copy a private key into this document, source code, or a support message.
 
+## Download the two JSON credentials
+
+You need one Web application OAuth client JSON and one service-account key JSON. These are created separately and can live in separate Google Cloud projects.
+
+### OAuth client JSON (Gmail)
+
+Google's [OAuth web server setup guide](https://developers.google.com/identity/protocols/oauth2/web-server) covers the same Web application client type.
+
+1. In Cloud Console, select the project you will use for Gmail OAuth. Open **APIs & Services → Credentials** (or **Google Auth Platform → Clients**) and click **Create credentials → OAuth client ID**.
+2. If Google asks you to configure the consent screen first, choose **External** for a personal Gmail account, enter an app name and your email for the support/contact fields, save, and add your account as a test user under **Audience**. Keep the app in Testing for local use.
+3. Choose **Web application** as the application type and name the client. Under **Authorized redirect URIs**, add `http://localhost:8081/oauth/callback`, then create the client.
+4. In the client details, click **Download JSON**. Save the downloaded file unchanged in the Cosmos project root. Cosmos auto-detects a Web OAuth client JSON there. If you store it elsewhere or use a custom filename, set `GOOGLE_OAUTH_CLIENT_FILE` in `.env` to its absolute path.
+
+### Service-account JSON (Vertex AI and Sheets)
+
+Google's [service account key guide](https://cloud.google.com/iam/docs/keys-create-delete) documents key creation and download behavior.
+
+1. In Cloud Console, select the project you will use for Vertex AI and Sheets. Open **IAM & Admin → Service Accounts** and click **Create service account** if you do not already have one. Give it a descriptive account name; a service account email will be created for it.
+2. Grant it the **Vertex AI User** role (`roles/aiplatform.user`) on the project as described below. Enable Vertex AI API and Google Sheets API in this project.
+3. Open the service account, choose its **Keys** tab, then **Add key → Create new key → JSON → Create**. The browser downloads the private key JSON immediately; Google does not let you download that same key again later.
+4. Move the downloaded file into the Cosmos project root without editing its contents. Cosmos auto-detects a service-account JSON there. For a different location or custom filename, set `GOOGLE_APPLICATION_CREDENTIALS` in `.env` to its absolute path.
+5. Copy the service account's email from the Service Accounts list and share the target spreadsheet with that address as **Editor** (see Sheets access below).
+
+If your organization blocks service-account key creation, ask its administrator about an approved keyless identity setup; do not weaken organization policy or use another person's key. For a local standalone app, the JSON key is the simplest supported setup, but treat it like a password.
+
 ## 2. Gmail: sign-in and email access
 
 In the OAuth client's project:
