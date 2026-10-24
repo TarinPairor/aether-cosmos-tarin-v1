@@ -1,0 +1,24 @@
+{
+  "name": "aether-mail",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "dev": "node --watch --env-file-if-exists=.env server.js",
+    "test": "node --test test/*.test.js",
+    "test:browser": "node scripts/browser-test.js",
+    "diagnose": "node --env-file-if-exists=.env scripts/diagnose.js"
+  },
+  "dependencies": {
+    "google-auth-library": "^10.5.0",
+    "html-to-text": "^10.0.1",
+    "iconv-lite": "^0.7.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

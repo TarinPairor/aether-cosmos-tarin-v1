@@ -1,0 +1,22 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { Store } from './lib/storage.js';
+import { GoogleServices } from './lib/google.js';
+import { createApp } from './lib/app.js';
+import { SheetsService } from './lib/sheets.js';
+import { IntakeService } from './lib/intake.js';
+
+const root = path.dirname(fileURLToPath(import.meta.url));
+const port = Number(process.env.PORT || 8081);
+if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('PORT must be a valid port.');
+const store = new Store(path.join(root, '.data'));
+const google = new GoogleServices(root, store, port);
+await google.init();
+const sheets = new SheetsService(root, store);
+await sheets.init();
+const intake = new IntakeService({ store, google, sheets });
+const { server, tick } = createApp({ root, store, google, intake, port });
+const interval = setInterval(() => tick().catch(() => console.error('Scheduler could not access local storage.')), 15000);
+server.on('error', error => { console.error(error.code === 'EADDRINUSE' ? `Port ${port} is already in use.` : `Could not start local server (${error.code || 'unknown error'}). Run npm start from your terminal.`); process.exit(1); });
+server.listen(port, '127.0.0.1', () => console.log(`Aether Mail is running at http://localhost:${port}`));
+for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => { clearInterval(interval); server.close(() => process.exit(0)); });

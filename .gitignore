@@ -1,0 +1,10 @@
+node_modules/
+.env
+.data/
+# Local Google credentials and other root-level JSON secrets.
+/*.json
+!/package.json
+!/package-lock.json
+test-results/
+playwright-report/
+*.log
