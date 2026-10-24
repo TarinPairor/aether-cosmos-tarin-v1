@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Bananra — conversation dashboard</title>
+  <title>Cosmos — conversation dashboard</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
   <script src="/app.js" defer></script>
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="/" aria-label="Bananra home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 9h24v17H4zM4 9l12 10L28 9M10 4h12"/></svg>Bananra</a><span class="local"><i></i>Local workspace · 8081</span></header>
+  <header class="topbar"><a class="brand" href="/" aria-label="Cosmos home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 9h24v17H4zM4 9l12 10L28 9M10 4h12"/></svg>Cosmos</a><span class="local"><i></i>Local workspace · 8081</span></header>
   <main>
     <div class="intro"><div><h1>Every conversation,<br><em>in one place.</em></h1><p>Warm introductions. Thoughtful follow-ups.<br>A complete profile, one conversation at a time.</p></div>
       <div class="connection"><div class="connection-heading"><h2>Your connections</h2><button id="test" class="text-button" type="button">Test connections</button></div><dl><div><dt>Gemini</dt><dd id="gemini-status">Checking…</dd></div><div><dt>Gmail</dt><dd id="gmail-status">Checking…</dd></div></dl><a id="connect" class="button secondary" href="/oauth/start">Connect Gmail</a><p id="oauth-help" class="small"></p></div>
@@ -24,10 +24,10 @@
         <div class="sheet-settings"><h3>Profile spreadsheet</h3><p class="small">Paste a Google Sheets link. Share it with the service account as Editor.</p><label for="sheet-input">Google Sheets link</label><input id="sheet-input" type="url" placeholder="https://docs.google.com/spreadsheets/d/…" maxlength="2000"><button id="connect-sheet" class="button secondary" type="button">Connect sheet</button><a id="sheet-link" class="small" href="https://docs.google.com/spreadsheets/d/16M6CNZWDmPNXB-ZXz34uIN9xVzGvNbvoTPb5mmXE8TY/edit#gid=0" target="_blank" rel="noreferrer">Open connected spreadsheet</a><button id="check-sheet" class="text-button" type="button">Check spreadsheet</button><p id="sheet-result" class="small" role="status"></p></div>
       </aside>
       <div class="thread-workspace">
-        <section id="new-conversation" aria-labelledby="new-heading"><h2 id="new-heading">Start with a hello.</h2><p class="section-description">Bananra will collect the missing profile details in a natural conversation. Review the introduction before sending.</p><form id="intro-form"><label for="person-email">Person’s email address</label><input id="person-email" type="email" required maxlength="254" placeholder="person@example.com"><button id="generate-intro" class="button primary" type="submit">Generate intro</button></form><p class="small">At most five outgoing emails per thread, including the introduction. A new thread must be started explicitly.</p></section>
+        <section id="new-conversation" aria-labelledby="new-heading"><h2 id="new-heading">Start with a hello.</h2><p class="section-description">Cosmos will collect the missing profile details in a natural conversation. Review the introduction before sending.</p><form id="intro-form"><label for="person-email">Person’s email address</label><input id="person-email" type="email" required maxlength="254" placeholder="person@example.com"><button id="generate-intro" class="button primary" type="submit">Generate intro</button></form><p class="small">At most five outgoing emails per thread, including the introduction. A new thread must be started explicitly.</p></section>
         <section id="conversation-detail" aria-label="Selected conversation" hidden>
           <div class="selected-heading"><div><h2 id="conversation-title"></h2><p id="conversation-email" class="small"></p></div><span id="conversation-status" class="status-tag"></span></div>
-          <div class="thread-counts" aria-label="Thread counts"><span><strong id="reply-count">0</strong> recipient replies</span><span><strong id="sent-count">0 / 5</strong> Bananra emails</span><span><strong id="message-count">0</strong> total messages</span></div>
+          <div class="thread-counts" aria-label="Thread counts"><span><strong id="reply-count">0</strong> recipient replies</span><span><strong id="sent-count">0 / 5</strong> Cosmos emails</span><span><strong id="message-count">0</strong> total messages</span></div>
           <p id="conversation-help" class="small"></p><p id="conversation-error" class="small failed" role="alert" hidden></p>
           <div id="conversation-actions" class="intake-actions"><button id="generate-next" class="button primary" type="button">Generate reply</button><button id="pause-thread" class="button secondary" type="button" hidden>Pause</button><button id="resume-thread" class="button secondary" type="button" hidden>Resume</button><button id="new-thread" class="button secondary" type="button" hidden>Start a new thread</button></div>
           <label id="automation-label" class="automation-label" hidden><input id="auto-reply" type="checkbox">Send follow-ups automatically after recipient replies</label>
@@ -38,5 +38,5 @@
       </div>
     </section>
   </main>
-  <footer><span>Bananra</span><p>Profiles update as replies arrive. The app must stay running and the computer awake.</p></footer>
+  <footer><span>Cosmos</span><p>Profiles update as replies arrive. The app must stay running and the computer awake.</p></footer>
 </body></html>

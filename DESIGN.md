@@ -1,4 +1,4 @@
-# Bananra conversation dashboard
+# Cosmos conversation dashboard
 
 An Operate interface for profile intake. Preserve the warm cream background, green actions, restrained serif headings, native sans-serif controls, visible labels and keyboard focus.
 

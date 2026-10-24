@@ -1,4 +1,4 @@
-# Bananra
+# Cosmos
 
 <!-- impeccable:product-schema 1 -->
 
@@ -12,7 +12,7 @@ A single local operator manages natural email conversations that collect 20 prof
 
 ## Confirmed requirements
 
-Warm conversational persona Bananra; source-supported answers without guessing personal details; incremental header-based spreadsheet updates; at most five outgoing emails per thread including the introduction; explicit new threads after the cap.
+Warm conversational persona Cosmos; source-supported answers without guessing personal details; incremental header-based spreadsheet updates; at most five outgoing emails per thread including the introduction; explicit new threads after the cap.
 
 The thread dashboard supports clicking existing conversations, full message history and recipient reply counts. Before the first send, actions are Generate intro / Send intro. Afterward they are Generate reply / Send reply. The operator can generate a continuation without waiting for another recipient response. The bottom freeform email composer is removed.
 

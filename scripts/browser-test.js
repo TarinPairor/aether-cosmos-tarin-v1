@@ -8,7 +8,7 @@ import { Store } from '../lib/storage.js';
 import { createApp } from '../lib/app.js';
 import { IntakeService } from '../lib/intake.js';
 
-const directory = await mkdtemp(path.join(tmpdir(), 'bananra-browser-'));
+const directory = await mkdtemp(path.join(tmpdir(), 'cosmos-browser-'));
 const store = new Store(directory);
 await store.write('gmail-account', {email:'owner@example.com'});
 const threads = new Map(), rows = new Map();
@@ -17,7 +17,7 @@ const google = {
   hasService:true,hasOAuth:true,redirectConfigured:true,oauthKind:'web',redirect:'http://localhost:8081/oauth/callback',model:'test-model',backend:'vertex',
   canReadThreads:async()=>true,checkReadAccess:async()=>'Reading is available.',identity:async()=>({email:'owner@example.com'}),
   generate:async()=>({subject:'Test',body:'Connection works.'}),
-  planIntake:async({incoming,continuation})=>({subject:'Hello',body:continuation?'Just checking in—would you like to share where you are based?\n\nBananra':incoming.length?'Thanks, Maya. Where are you based?\n\nBananra':'Hi, I’m Bananra, an assistant helping with your profile. What is your name?\n\nBananra',
+  planIntake:async({incoming,continuation})=>({subject:'Hello',body:continuation?'Just checking in—would you like to share where you are based?\n\nCosmos':incoming.length?'Thanks, Maya. Where are you based?\n\nCosmos':'Hi, I’m Cosmos, an assistant helping with your profile. What is your name?\n\nCosmos',
     facts:incoming.flatMap(m=>m.body.includes('My first name is Maya.')?[{field:'First Name',value:'Maya',messageId:m.id,evidence:'My first name is Maya.'}]:[])}),
   listThreads:async()=>({threads:[...threads.values()].map(t=>({id:t.id,subject:t.subject,from:t.messages.at(-1).from,messageCount:t.messages.length,replyCount:t.messages.filter(m=>!m.sentByOwner).length})),nextPageToken:null}),
   getThread:async id=>structuredClone(threads.get(id)),

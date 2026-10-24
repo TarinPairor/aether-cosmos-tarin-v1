@@ -1,6 +1,6 @@
-# Bananra
+# Cosmos
 
-A local conversation dashboard at **http://localhost:8081**. Bananra collects profile details through warm email conversations and saves confirmed information into one Google Sheets row per person.
+A local conversation dashboard at **http://localhost:8081**. Cosmos collects profile details through warm email conversations and saves confirmed information into one Google Sheets row per person.
 
 ## Start
 
@@ -20,7 +20,7 @@ The app uses three Google services: Gmail through your signed-in Google account,
 ## Conversation dashboard
 
 - **New conversation:** enter a person's email and click **Generate intro**. Review the preview and choose **Send intro**.
-- **Continue:** click any saved thread in the sidebar. The thread shows its complete history, recipient reply count, Bananra emails out of five, total messages, and collected profile details.
+- **Continue:** click any saved thread in the sidebar. The thread shows its complete history, recipient reply count, Cosmos emails out of five, total messages, and collected profile details.
 - After the introduction, the action changes to **Generate reply** and **Send reply**. Generate reply can continue the conversation even if no new recipient response has arrived. It uses the full thread and known profile, asks for missing details, and never invents new answers. Generating does not send an email.
 - **Existing Gmail threads:** refresh/load the Gmail list, click a conversation, then choose Generate reply to continue it as an intake. Historical outgoing messages count toward the five-email limit. Reopening an already-managed thread preserves its identity and counter.
 - New conversations default to **review mode**. Replies arriving in the background are processed into the profile and a staged preview, without sending. The selected thread refreshes every 15 seconds while the page is visible.
@@ -39,7 +39,7 @@ Country, City, State, Postal Code, Address, Nationality, Occupation, Company,
 Department, Marital Status, Education, Employment Status
 ```
 
-The header names define the fields the model collects and the columns the app updates. Keep an `Email` column so it can match people to conversations; `Person ID` is optional and system-managed when present. Other columns are asked about conversationally. Dropdown choices are read from the sheet and included in the model prompt; the app only writes an exact allowed choice to those cells. If a reply does not clearly match an option, Bananra asks the recipient to choose one. Explicit declines are recorded as `Declined`; missing values stay blank. The model must cite the recipient's actual text, and unsupported or inferred values are rejected. Birth dates require unambiguous calendar dates.
+The header names define the fields the model collects and the columns the app updates. Keep an `Email` column so it can match people to conversations; `Person ID` is optional and system-managed when present. Other columns are asked about conversationally. Dropdown choices are read from the sheet and included in the model prompt; the app only writes an exact allowed choice to those cells. If a reply does not clearly match an option, Cosmos asks the recipient to choose one. Explicit declines are recorded as `Declined`; missing values stay blank. The model must cite the recipient's actual text, and unsupported or inferred values are rejected. Birth dates require unambiguous calendar dates.
 
 Confirmed details update the same row incrementally. Existing matching Person ID/Email rows are reused. Duplicate identities or missing/duplicate headers stop the write rather than guessing. Other columns and rows are preserved. Writes use `RAW`, preserving phone/postal formatting and preventing text from becoming spreadsheet formulas.
 

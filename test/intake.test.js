@@ -8,10 +8,10 @@ import { IntakeService, applyFacts, authoredText } from '../lib/intake.js';
 import { ANSWER_FIELDS } from '../lib/intake-fields.js';
 
 async function fixture(t) {
-  const dir = await mkdtemp(path.join(tmpdir(), 'bananra-test-')); t.after(() => rm(dir, {recursive:true,force:true}));
+  const dir = await mkdtemp(path.join(tmpdir(), 'cosmos-test-')); t.after(() => rm(dir, {recursive:true,force:true}));
   const store = new Store(dir); await store.write('gmail-account', {email:'sender@example.com'});
   const rows = new Map(), threads = new Map(), sent = [], calls = [];
-  let plan = {subject:'Hello', body:'Hi, I’m Bananra, an assistant helping with your profile. What is your name and where are you based?', facts:[]};
+  let plan = {subject:'Hello', body:'Hi, I’m Cosmos, an assistant helping with your profile. What is your name and where are you based?', facts:[]};
   const sheets = {
     lookup: async email => ({profile:structuredClone(rows.get(email)?.profile || {}),row:rows.get(email)?.row || null,fields:(await import('../lib/intake-fields.js')).FIELDS}),
     upsert: async profile => { const row=rows.get(profile.Email)?.row || rows.size+2; rows.set(profile.Email,{row,profile:structuredClone(profile)}); return {row,url:'https://example.com/sheet'}; },
@@ -42,7 +42,7 @@ async function fixture(t) {
 test('opening is previewed, writes identity once, and waits for replies without random reminders', async t=>{
  const f=await fixture(t), session=await f.service.prepare('person@example.com');
  assert.equal(f.sent.length,0); assert.equal(f.rows.size,0); assert.equal(session.sentCount,0);
- await f.service.start(session.id); assert.equal(f.sent.length,1); assert.equal(f.sent[0].fromName,'Bananra');
+ await f.service.start(session.id); assert.equal(f.sent.length,1); assert.equal(f.sent[0].fromName,'Cosmos');
  assert.equal(f.rows.size,1); assert.equal(f.rows.get(session.email).profile.Email,session.email);
  await f.service.poll(); await f.service.poll(); assert.equal(f.sent.length,1);
  await assert.rejects(()=>f.service.start(session.id),/already started/);

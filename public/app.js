@@ -75,7 +75,7 @@ function renderDetail() {
   const draft=session?.pendingDraft;
   $('reply-preview').hidden=!draft;
   $('preview-heading').textContent=started?'Reply preview':'Introduction preview';
-  $('preview-recipient').textContent=session?`From: Bananra <${session.owner}> · To: ${session.email}`:'';
+  $('preview-recipient').textContent=session?`From: Cosmos <${session.owner}> · To: ${session.email}`:'';
   $('preview-subject').textContent=draft?.subject||'';$('preview-body').textContent=draft?.body||'';
   $('send-preview').textContent=started?'Send reply':'Send intro';
   $('send-preview').disabled=working||offline||!draft||terminal||cap||Boolean(session?.autoReply&&started)||!['ready','reply_ready','followup_ready'].includes(session?.status);
@@ -91,7 +91,7 @@ function render() {
   $('gmail-status').textContent=offline?'Server unavailable':state.account?.email||'Not connected';
   $('connect').textContent=state.account?'Reconnect Gmail':'Connect Gmail';$('connect').setAttribute('aria-disabled',String(!state.oauthFound||working||offline));
   if(state.sheet?.url){$('sheet-link').href=state.sheet.url;if(document.activeElement!==$('sheet-input'))$('sheet-input').value=state.sheet.url;}
-  $('oauth-help').textContent=!state.oauthFound?'OAuth client credentials are missing. Add the JSON file and restart.':!state.account?'Sign in to read conversations and send email.':!state.canReadThreads&&!state.diagnostics?.threads?.ok?'Reconnect Gmail and approve email-reading access.':'Connected Gmail sends as Bananra. Profiles use the shared spreadsheet.';
+  $('oauth-help').textContent=!state.oauthFound?'OAuth client credentials are missing. Add the JSON file and restart.':!state.account?'Sign in to read conversations and send email.':!state.canReadThreads&&!state.diagnostics?.threads?.ok?'Reconnect Gmail and approve email-reading access.':'Connected Gmail sends as Cosmos. Profiles use the shared spreadsheet.';
   $('generate-intro').disabled=working||offline||!state.account||!state.serviceAccountFound;
   $('refresh-threads').disabled=working||offline||!state.account;$('more-threads').disabled=working||offline||!state.account;
   $('connect-sheet').disabled=working||offline||!state.serviceAccountFound;
